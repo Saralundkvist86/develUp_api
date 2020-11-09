@@ -11,6 +11,7 @@ gem "rack-cors", require: "rack/cors"
 gem "active_model_serializers"
 gem "active_model_validates_intersection_of"
 gem 'devise_token_auth'
+gem 'paypal-sdk-rest'
 
 group :development, :test do
   gem "rspec-rails"
