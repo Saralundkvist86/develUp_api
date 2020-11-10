@@ -47,4 +47,26 @@ RSpec.describe 'PUT /api/assignments', type: :request do
       expect(response_json['message']).to eq 'You already applied to this assignment'
     end
   end
+
+  describe 'develUper successfully apply to assignment' do
+    before do
+      put "/api/assignments/#{assignment.id}",
+          params: {
+            assignment: { applicants: develuper.id.to_s }
+          }, headers: headers
+    end
+
+    it 'responds with ok status' do
+      expect(response).to have_http_status :ok
+    end
+
+    it 'returns success message' do
+      expect(response_json['message']).to eq 'successfully applied'
+    end
+
+    it 'updates an assignment with applicants' do
+      assignment = Assignment.last
+      expect(assignment.applicants).to eq [1, 2, develuper.id]
+    end
+  end
 end
